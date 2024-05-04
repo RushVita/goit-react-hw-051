@@ -8,8 +8,15 @@ const options = {
   },
 };
 
-export const fetchArticles = async () => {
+export const fetchTrendingmovies = async () => {
   const response = await axios.get("", options);
 
   return response.data;
+};
+
+export const fetchById = async () => {
+  const response = await axios.get(``, options);
+
+  return response.data;
+  
 };
