@@ -1,6 +1,6 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "https://api.themoviedb.org/3/trending/movie/day";
+axios.defaults.baseURL = "https://api.themoviedb.org/3/";
 const options = {
   headers: {
     Authorization:
@@ -9,13 +9,25 @@ const options = {
 };
 
 export const fetchTrendingmovies = async () => {
-  const response = await axios.get("", options);
+  const response = await axios.get("trending/movie/day", options);
 
   return response.data;
 };
 
-export const fetchById = async () => {
-  const response = await axios.get(``, options);
+export const fetchByIdDetails = async (id) => {
+  const response = await axios.get(`movie/${id}`, options);
+
+  return response.data;
+  
+};
+export const fetchByIdCredits = async (id) => {
+  const response = await axios.get(`movie/${id}/credits`, options);
+
+  return response.data;
+  
+};
+export const fetchByIdReviews = async (id) => {
+  const response = await axios.get(`movie/${id}/reviews`, options);
 
   return response.data;
   

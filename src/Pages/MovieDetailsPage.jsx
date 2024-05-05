@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
-import { useParams, useSearchParams } from "react-router-dom";
-import { fetchById } from "../articles-api";
+import { useParams, useSearchParams, Link, Outlet } from "react-router-dom";
+import { fetchByIdDetails, fetchByIdCredits } from "../articles-api";
+import MovieCast from "../Components/MovieCast/MovieCast";
+import MovieReviews from "../Components/MovieReviews/MovieReviews";
 
 export default function MovieDetailsPage() {
-  const [movie, setMovie] = useState([]);
+  const [movie, setMovie] = useState(null);
+
   const [isLoad, setIsLoad] = useState(false);
   const [error, setError] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -11,12 +14,12 @@ export default function MovieDetailsPage() {
   const { movieId } = useParams();
 
   useEffect(() => {
-    async function getTrendingmovies() {
+    async function getMovies() {
       try {
         setIsLoad(true);
-        const data = await fetchById(movieId);
+        const data = await fetchByIdDetails(movieId);
 
-        setMovie(data.results.filter((item) => item.id == movieId));
+        setMovie(data);
       } catch (error) {
         setError(true);
       } finally {
@@ -24,23 +27,49 @@ export default function MovieDetailsPage() {
       }
     }
 
-    getTrendingmovies();
+    getMovies();
+  }, [movieId]);
+
+  useEffect(() => {
+    async function getCast() {
+      try {
+        setIsLoad(true);
+        const data = await fetchByIdCredits(movieId);
+        setCast(data.cast);
+      } catch (error) {
+        setError(true);
+      } finally {
+        setIsLoad(false);
+      }
+    }
+    getCast();
   }, [movieId]);
 
   return (
     <div>
       <h1>MovieDetailsPage</h1>
-      {movie.length > 0 && (
+      {movie !== null && (
         <div>
-          <img src={`https://image.tmdb.org/t/p/w500/${movie[0].poster_path}`} width={300} alt="" />
-          <h2>{movie[0].title}</h2>
-          <p>Release Date: {movie[0].release_date}</p>
+          <img src={`https://image.tmdb.org/t/p/w300/${movie.backdrop_path}`} alt="" />
+          <h2>{movie.title}</h2>
+          <p>Release Date: {movie.release_date}</p>
           <p>
-            Overview: <br /> {movie[0].overview}
+            Overview: <br /> {movie.overview}
           </p>
-          <p>Rating: {movie[0].vote_average}</p>
+          <p>Rating: {movie.vote_average}</p>
+          <p>
+            Genres:{" "}
+            {movie.genres.map((item) => (
+              <span key={item.id}>{item.name} </span>
+            ))}
+          </p>
         </div>
       )}
+
+      <Link to={"cast"}>Cast</Link>
+      <Link to={"reviews"}>Reviews</Link>
+
+      <Outlet />
     </div>
   );
 }

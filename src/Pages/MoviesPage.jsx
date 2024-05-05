@@ -9,6 +9,10 @@ export default function MoviesPage() {
       >
         MoviesPage
       </h1>
+      <form>
+        <input type="text" />
+        <button>Search</button>
+      </form>
     </div>
   );
 }
