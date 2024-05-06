@@ -1,17 +1,17 @@
 import { Route, Routes } from "react-router-dom";
-import css from "./App.module.css";
-import HomePage from "../Pages/HomePage/HomePage";
-import MoviesPage from "../Pages/MoviesPage/MoviesPage";
-import MovieDetailsPage from "../Pages/MovieDetailsPage/MovieDetailsPage";
-import NotFoundPage from "../Pages/NotFoundPage/NotFoundPage";
-import Navigation from "./Navigation/Navigation";
-import MovieCast from "./MovieCast/MovieCast";
-import MovieReviews from "./MovieReviews/MovieReviews";
+import { lazy } from "react";
+import { Layout } from "./Layout";
 
 function App() {
+  const HomePage = lazy(async () => import("../Pages/HomePage/HomePage"));
+  const MoviesPage = lazy(async () => import("../Pages/MoviesPage/MoviesPage"));
+  const MovieDetailsPage = lazy(async () => import("../Pages/MovieDetailsPage/MovieDetailsPage"));
+  const NotFoundPage = lazy(async () => import("../Pages/NotFoundPage/NotFoundPage"));
+  const MovieCast = lazy(async () => import("./MovieCast/MovieCast"));
+  const MovieReviews = lazy(async () => import("./MovieReviews/MovieReviews"));
+
   return (
-    <div className={css.container}>
-      <Navigation />
+    <Layout>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/movies" element={<MoviesPage />} />
@@ -21,7 +21,7 @@ function App() {
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-    </div>
+    </Layout>
   );
 }
 

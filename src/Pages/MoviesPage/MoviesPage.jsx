@@ -1,16 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { useThrottle } from "@uidotdev/usehooks";
 import { ThreeDots } from "react-loader-spinner";
+import { fetchSearch } from "../../articles-api";
+import { useFetchData } from "../../hooks/useFetchData";
 import MovieList from "../../Components/MovieList/MovieList";
 
-import { useSearchParams } from "react-router-dom";
-import { useFetchData } from "../../hooks/useFetchData";
-import { fetchSearch } from "../../articles-api";
-
 export default function MoviesPage() {
-  const [query, setQuery] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
+  const throttledValue = useThrottle(inputValue, 300);
   const getValue = searchParams.get("query");
+
+  const { data, isLoad, error } = useFetchData(fetchSearch, throttledValue);
+
+  useEffect(() => {
+    if (!getValue) return;
+
+    setInputValue(getValue);
+  }, [getValue]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,10 +26,7 @@ export default function MoviesPage() {
     if (inputValue === "") return;
 
     setSearchParams({ query: inputValue });
-    setQuery(inputValue);
   };
-
-  const { data, isLoad, error } = useFetchData(fetchSearch, query);
 
   return (
     <div>
@@ -36,9 +41,9 @@ export default function MoviesPage() {
             setSearchParams({ query: e.target.value });
           }}
         />
-        <button>Search</button>
+        <button>Мені не подобається ідея використання пошуку при сабміті</button>
       </form>
-      {data.length > 0 && <MovieList movie={data}></MovieList>}
+      {data && <MovieList movie={data.results}></MovieList>}
       {isLoad && (
         <div>
           <ThreeDots color="#cc5801" />

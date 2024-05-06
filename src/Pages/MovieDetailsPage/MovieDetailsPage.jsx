@@ -3,6 +3,7 @@ import { ThreeDots } from "react-loader-spinner";
 import css from "./MovieDetailsPage.module.css";
 import { useFetchData } from "../../hooks/useFetchData";
 import { fetchByIdDetails } from "../../articles-api";
+
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
   const location = useLocation();
@@ -37,9 +38,9 @@ export default function MovieDetailsPage() {
           </p>
           <p>
             <span className={css.title_desc}>Genres: </span>
-            {/* {data.genres.map((item) => (
+            {data.genres.map((item) => (
               <span key={item.id}>{item.name} </span>
-            ))} */}
+            ))}
           </p>
         </div>
       )}

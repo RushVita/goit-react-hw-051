@@ -8,12 +8,12 @@ export default function HomePage() {
     <div>
       <h1>HomePage</h1>
       <h2>Trending movies</h2>
-      <MovieList movie={film} />{" "}
+      <MovieList movie={film} />
       {isLoad && (
         <div>
           <ThreeDots color="#cc5801" />
         </div>
-      )}{" "}
+      )}
       {error && <div>Ops Error😔 Please try again!</div>}
     </div>
   );

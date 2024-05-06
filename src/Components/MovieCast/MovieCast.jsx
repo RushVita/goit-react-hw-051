@@ -1,12 +1,13 @@
 import { useParams } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
+import { useFetchData } from "../../hooks/useFetchData";
+import { fetchByIdCredits } from "../../articles-api";
 import css from "./MovieCast.module.css";
-import { useGetCast } from "../../hooks/useGetCast";
 
 export default function MovieCast() {
   const { movieId } = useParams();
 
-  const { cast, isLoad, error } = useGetCast(movieId);
+  const { data, isLoad, error } = useFetchData(fetchByIdCredits, movieId);
 
   return (
     <ul className={css.wraper}>
@@ -15,8 +16,8 @@ export default function MovieCast() {
           <ThreeDots color="#cc5801" />
         </div>
       )}
-      {cast !== null &&
-        cast.map((item) => {
+      {data?.cast &&
+        data?.cast.map((item) => {
           return (
             <li className={css.item_wrap} key={item.cast_id}>
               <img src={`https://image.tmdb.org/t/p/w200/${item.profile_path}`} alt="" />
@@ -24,7 +25,7 @@ export default function MovieCast() {
             </li>
           );
         })}
-      {error && <div>We dont have Cast or Error😔</div>}
+      {error && <div>Sorry Error😔</div>}
     </ul>
   );
 }
