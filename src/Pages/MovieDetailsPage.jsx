@@ -1,8 +1,8 @@
 import { useParams, Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
-import css from "./MovieDetailsPage.module.css";
-import { useFetchData } from "../../hooks/useFetchData";
-import { fetchByIdDetails } from "../../articles-api";
+import css from "./MovieDetailsPage.module.css"; 
+import { fetchByIdDetails } from "../articles-api";
+import { useFetchData } from "../useFetchData";
 
 export default function MovieDetailsPage() {
   const { movieId } = useParams();
@@ -22,7 +22,6 @@ export default function MovieDetailsPage() {
       >
         Go Back
       </button>
-      
 
       {data !== null && (
         <div>

@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
-import { useFetchData } from "../../hooks/useFetchData";
 import { fetchByIdCredits } from "../../articles-api";
+import { useFetchData } from "../../useFetchData";
 import css from "./MovieCast.module.css";
 
 export default function MovieCast() {

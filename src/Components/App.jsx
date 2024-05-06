@@ -3,10 +3,10 @@ import { lazy } from "react";
 import { Layout } from "./Layout";
 
 export default function App() {
-  const HomePage = lazy(async () => import("../Pages/HomePage/HomePage"));
-  const MoviesPage = lazy(async () => import("../Pages/MoviesPage/MoviesPage"));
-  const MovieDetailsPage = lazy(async () => import("../Pages/MovieDetailsPage/MovieDetailsPage"));
-  const NotFoundPage = lazy(async () => import("../Pages/NotFoundPage/NotFoundPage"));
+  const HomePage = lazy(async () => import("../Pages//HomePage"));
+  const MoviesPage = lazy(async () => import("../Pages//MoviesPage"));
+  const MovieDetailsPage = lazy(async () => import("../Pages//MovieDetailsPage"));
+  const NotFoundPage = lazy(async () => import("../Pages//NotFoundPage"));
   const MovieCast = lazy(async () => import("./MovieCast/MovieCast"));
   const MovieReviews = lazy(async () => import("./MovieReviews/MovieReviews"));
 

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchTrendingmovies } from "../articles-api";
+import { fetchTrendingmovies } from "./articles-api";
 
 export function useGetFilms() {
   const [film, setFilm] = useState([]);

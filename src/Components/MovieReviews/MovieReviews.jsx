@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
 import { fetchByIdReviews } from "../../articles-api";
-import { useFetchData } from "../../hooks/useFetchData";
+import { useFetchData } from "../../useFetchData";
 import css from "./MovieReviews.module.css";
 
 export default function MovieReviews() {
