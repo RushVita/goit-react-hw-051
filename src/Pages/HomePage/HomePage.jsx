@@ -1,4 +1,4 @@
-import MovieList from "../../components/MovieList/MovieList";
+import MovieList from "../../Components/MovieList/MovieList";
 import { ThreeDots } from "react-loader-spinner";
 import { useGetFilms } from "../../hooks/useGetFilms";
 

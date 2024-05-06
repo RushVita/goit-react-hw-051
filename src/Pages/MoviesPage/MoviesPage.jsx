@@ -4,7 +4,7 @@ import { useThrottle } from "@uidotdev/usehooks";
 import { ThreeDots } from "react-loader-spinner";
 import { fetchSearch } from "../../articles-api";
 import { useFetchData } from "../../hooks/useFetchData";
-import MovieList from "../../components/MovieList/MovieList";
+import MovieList from "../../Components/MovieList/MovieList";
 
 export default function MoviesPage() {
   const [inputValue, setInputValue] = useState("");
