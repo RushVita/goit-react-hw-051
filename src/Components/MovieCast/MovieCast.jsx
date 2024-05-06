@@ -1,40 +1,30 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchByIdCredits } from "../../articles-api";
+import { ThreeDots } from "react-loader-spinner";
+import css from "./MovieCast.module.css";
+import { useGetCast } from "../../hooks/useGetCast";
 
 export default function MovieCast() {
-  const [cast, setCast] = useState(null);
-  const [isLoad, setIsLoad] = useState(false);
-  const [error, setError] = useState(false);
-
   const { movieId } = useParams();
 
-  useEffect(() => {
-    async function getCast() {
-      try {
-        setIsLoad(true);
-        const data = await fetchByIdCredits(movieId);
-        setCast(data.cast);
-      } catch (error) {
-        setError(true);
-      } finally {
-        setIsLoad(false);
-      }
-    }
-    getCast();
-  }, [movieId]);
+  const { cast, isLoad, error } = useGetCast(movieId);
 
   return (
-    <ul>
+    <ul className={css.wraper}>
+      {isLoad && (
+        <div>
+          <ThreeDots color="#cc5801" />
+        </div>
+      )}
       {cast !== null &&
         cast.map((item) => {
           return (
-            <li key={item.cast_id}>
+            <li className={css.item_wrap} key={item.cast_id}>
               <img src={`https://image.tmdb.org/t/p/w200/${item.profile_path}`} alt="" />
               <p>{item.original_name}</p>
             </li>
           );
         })}
+      {error && <div>We dont have Cast or Error😔</div>}
     </ul>
   );
 }

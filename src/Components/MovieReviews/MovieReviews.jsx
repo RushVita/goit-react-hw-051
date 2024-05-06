@@ -1,44 +1,32 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchByIdReviews } from "../../articles-api";
-
-
-
+import { ThreeDots } from "react-loader-spinner";
+import css from "./MovieReviews.module.css";
+import { useGetReviews } from "../../hooks/useGetReviews";
 
 export default function MovieReviews() {
-  const [reviews, setReviews] = useState(null);
-  const [isLoad, setIsLoad] = useState(false);
-  const [error, setError] = useState(false);
-
   const { movieId } = useParams();
 
-
-  useEffect(() => {
-    async function getCast() {
-      try {
-        setIsLoad(true);
-        const data = await fetchByIdReviews(movieId);
-        setReviews(data.results);
-      } catch (error) {
-        setError(true);
-      } finally {
-        setIsLoad(false);
-      }
-    }
-    getCast();
-  }, [movieId]);
+  const { reviews, isLoad, error } = useGetReviews(movieId);
 
   return (
-    <ul>
-      {reviews !== null &&
-        reviews.map((item) => {
+    <ul className={css.list}>
+      {isLoad && (
+        <div>
+          <ThreeDots color="#cc5801" />
+        </div>
+      )}
+      {reviews.length > 0 &&
+        reviews.map((review) => {
           return (
-            <li key={item.id}>
-              <h5>Author: {item.author}</h5>
-              <p>{item.content}</p>
+            <li key={review.id} className={css.item}>
+              <p>
+                Author: <span className={css.author}>{review.author}</span>
+              </p>
+              <p>{review.content}</p>
             </li>
           );
         })}
+      {error && <div>Sorry we don`t have reviews for htis movie or Erorr😔</div>}
     </ul>
   );
 }

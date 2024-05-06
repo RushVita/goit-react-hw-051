@@ -1,9 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import css from "./App.module.css";
-import HomePage from "../Pages/HomePage";
-import MoviesPage from "../Pages/MoviesPage";
-import MovieDetailsPage from "../Pages/MovieDetailsPage";
-import NotFoundPage from "../Pages/NotFoundPage";
+import HomePage from "../Pages/HomePage/HomePage";
+import MoviesPage from "../Pages/MoviesPage/MoviesPage";
+import MovieDetailsPage from "../Pages/MovieDetailsPage/MovieDetailsPage";
+import NotFoundPage from "../Pages/NotFoundPage/NotFoundPage";
 import Navigation from "./Navigation/Navigation";
 import MovieCast from "./MovieCast/MovieCast";
 import MovieReviews from "./MovieReviews/MovieReviews";

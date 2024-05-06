@@ -1,14 +1,13 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchTrendingmovies } from "../articles-api";
-import MovieList from "../Components/MovieList/MovieList";
 
-export default function HomePage() {
+export function useGetFilms() {
   const [film, setFilm] = useState([]);
   const [isLoad, setIsLoad] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
-    async function getTrendingmovies() {
+    (async () => {
       try {
         setIsLoad(true);
         const data = await fetchTrendingmovies();
@@ -18,22 +17,7 @@ export default function HomePage() {
       } finally {
         setIsLoad(false);
       }
-    }
-
-    getTrendingmovies();
+    })();
   }, []);
-
-  return (
-    <div>
-      <h1
-        style={{
-          textAlign: "center",
-        }}
-      >
-        HomePage
-      </h1>
-      <h2>Trending movies</h2>
-      <MovieList movie={film} />
-    </div>
-  );
+  return { film, isLoad, error };
 }
