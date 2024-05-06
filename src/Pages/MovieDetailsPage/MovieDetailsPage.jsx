@@ -22,6 +22,7 @@ export default function MovieDetailsPage() {
       >
         Go Back
       </button>
+      
 
       {data !== null && (
         <div>

@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { lazy } from "react";
 import { Layout } from "./Layout";
 
-function App() {
+export default function App() {
   const HomePage = lazy(async () => import("../Pages/HomePage/HomePage"));
   const MoviesPage = lazy(async () => import("../Pages/MoviesPage/MoviesPage"));
   const MovieDetailsPage = lazy(async () => import("../Pages/MovieDetailsPage/MovieDetailsPage"));
@@ -24,5 +24,3 @@ function App() {
     </Layout>
   );
 }
-
-export default App;
