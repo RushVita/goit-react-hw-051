@@ -41,7 +41,7 @@ export default function MoviesPage() {
             setSearchParams({ query: e.target.value });
           }}
         />
-        <button>Мені не подобається ідея використання пошуку при сабміті😊</button>
+        <button>Мені не подобається ідея використання пошуку при Cабміті😊</button>
       </form>
       {data && <MovieList movie={data.results}></MovieList>}
       {isLoad && (
