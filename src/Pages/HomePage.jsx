@@ -1,6 +1,6 @@
 import { ThreeDots } from "react-loader-spinner";
 import { useGetFilms } from "../useGetFilms";
-import MovieList from "../Components/MovieList/MovieList";
+import MovieList from "../components/MovieList/MovieList";
 
 export default function HomePage() {
   const { film, isLoad, error } = useGetFilms();

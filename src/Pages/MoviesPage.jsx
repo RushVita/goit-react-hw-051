@@ -4,7 +4,7 @@ import { useThrottle } from "@uidotdev/usehooks";
 import { ThreeDots } from "react-loader-spinner";
 import { fetchSearch } from "../articles-api";
 
-import MovieList from "../Components/MovieList/MovieList";
+import MovieList from "../components/MovieList/MovieList";
 import { useFetchData } from "../useFetchData";
 
 export default function MoviesPage() {
